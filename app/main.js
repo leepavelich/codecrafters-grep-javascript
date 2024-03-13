@@ -1,8 +1,18 @@
 function matchPattern(inputLine, pattern) {
+  if (pattern === `""`) return true;
+
   if (pattern.length === 1) {
     return inputLine.includes(pattern);
-  } else {
-    throw new Error(`Unhandled pattern ${pattern}`);
+  }
+
+  const inputChars = inputLine.split("");
+
+  switch (pattern) {
+    case "\\d": {
+      return inputChars.some((c) => !isNaN(c));
+    }
+    default:
+      throw new Error(`Unhandled pattern ${pattern}`);
   }
 }
 
